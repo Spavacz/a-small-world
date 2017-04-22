@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour {
     public GameObject worldPrefab;
     public GameObject characterPrefab;
 
+    public CameraController cameraController;
+
     public float rotationSpeed = 2f;
     public float rotationStopTime = 0.5f;
     private float currentRotationSpeed = 0;
@@ -15,10 +17,11 @@ public class GameController : MonoBehaviour {
 
     void Start() {
         world = Instantiate(worldPrefab);
+        SpawnCharacter();
     }
 
     void Update() {
-        if(Input.GetButtonDown("Fire2")) {
+        if(Input.GetButtonDown("Fire2") || Input.GetButtonDown("Jump")) {
             SpawnCharacter();
         }
         UpdateWorldRotationSpeed();

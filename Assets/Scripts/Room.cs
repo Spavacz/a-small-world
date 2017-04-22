@@ -7,18 +7,24 @@ public class Room : MonoBehaviour {
 
     public enum State {
         Cloner,
-        Destroyer
+        Destroyer,
+        Empty
     }
 
     public ContactFilter2D contactFilter;
-    public int maxAffected = 10;
+    public int maxDestroyed = 5;
+    public int maxCloned = 3;
+    public float flashSpeed = 1f;
+
     [Tooltip("In seconds")]
     public float affectCooldown = 1f;
     [Tooltip("In seconds")]
     public float morphCooldown = 5f;
 
     public Color clonerColor;
+    public Color clonerLidColor;
     public Color destroyerColor;
+    public Color destroyerLidColor;
 
     public Renderer backgroundRenderer1;
     public Renderer backgroundRenderer2;
@@ -50,6 +56,9 @@ public class Room : MonoBehaviour {
     }
 
     private void AffectArea() {
+        SetColor(state == State.Cloner ? clonerLidColor : destroyerLidColor);
+
+        int maxAffected = state == State.Cloner ? maxCloned : maxDestroyed;
         Collider2D[] inArea = new Collider2D[maxAffected];
         int affectedCount = collider2d.OverlapCollider(contactFilter, inArea);
 
@@ -82,16 +91,24 @@ public class Room : MonoBehaviour {
         if(morphCooldownCounter == 0) {
             Morph();
             morphCooldownCounter = morphCooldown;
+            affectCooldownCounter = affectCooldown;
         }
     }
 
     private void Morph() {
         state = state == State.Cloner ? State.Destroyer : State.Cloner;
+        SetColor(state == State.Cloner ? clonerColor : destroyerColor);
+    }
+
+    private void SetColor(Color color) {
+        backgroundRenderer1.material.color = color;
+        backgroundRenderer2.material.color = color;
     }
 
     private void UpdateColor() {
         Color color = state == State.Cloner ? clonerColor : destroyerColor;
-        backgroundRenderer1.material.color = color;
-        backgroundRenderer2.material.color = color;
+        Color currentColor = backgroundRenderer1.material.color;
+        color = Color.Lerp(currentColor, color, Time.deltaTime * flashSpeed);
+        SetColor(color);
     }
 }
