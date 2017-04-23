@@ -32,7 +32,10 @@ public class GameSequence : MonoBehaviour {
     public float defaultDuration;
     public int sequenceSeed;
 
-    private int currentIndex;
+    [HideInInspector]
+    public float currentTime;
+    [HideInInspector]
+    public int currentIndex;
     private float cooldown;
 
     void Start() {
@@ -40,6 +43,7 @@ public class GameSequence : MonoBehaviour {
     }
 
     void Update() {
+        currentTime += Time.deltaTime;
         cooldown -= Time.deltaTime;
 
         if(cooldown <= 0) {
