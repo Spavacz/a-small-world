@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 
     private Color color;
     private Camera camera;
-    private AudioProcessor processor;
+    public AudioProcessor processor;
 
     void Awake() {
         camera = GetComponent<Camera>();
