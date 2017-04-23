@@ -31,11 +31,6 @@ public class CameraController : MonoBehaviour {
             Flash();
             Zoom();
         }
-//        for(int i = 0; i < spectrum.Length; ++i) {
-//            Vector3 start = new Vector3(i, 0, 0);
-//            Vector3 end = new Vector3(i, spectrum[i] * 100f, 0);
-//            Debug.DrawLine(start, end, Color.yellow);
-//        }
     }
 
     void Update() {
@@ -66,4 +61,9 @@ public class CameraController : MonoBehaviour {
             camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, camSize, Time.deltaTime * flashSpeed);
         }
     }
+
+    public void FlashScreen() {
+        CameraFade.StartAlphaFade(Color.white, true, 1f, 0f);    
+    }
+
 }
