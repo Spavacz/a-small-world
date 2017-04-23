@@ -12,33 +12,26 @@ public class Room : MonoBehaviour {
         COUNT
     }
 
-    public GameController gameController;
-
     public ContactFilter2D contactFilter;
     public int maxDestroyed = 5;
     public int maxCloned = 3;
     public float flashSpeed = 1f;
-
     [Tooltip("In seconds")]
     public float affectCooldown = 1f;
-    [Tooltip("In seconds")]
-    public float morphCooldown = 5f;
 
+    [HideInInspector]
+    public State state;
+
+    public GameController gameController;
+    public Light light;
+    public GameObject background;
     public Color clonerColor;
     public Color clonerLitColor;
     public Color killerColor;
-    public Color destroyerLitColor;
-    public Color emptyColor;
-
-    public Light light;
-    public float lightIntensivity;
-    public float glowLightIntensivity;
+    public Color killerLitColor;
 
     private Collider2D collider2d;
-
     private float affectCooldownCounter;
-
-    public State state;
 
     void Awake() {
         collider2d = GetComponent<Collider2D>();
@@ -59,9 +52,7 @@ public class Room : MonoBehaviour {
     }
 
     private void AffectArea() {
-        //SetColor(GetLitStateColor(state));
-        // todo glow more
-        Glow();
+        SetColor(GetLitStateColor(state));
 
         int maxAffected = state == State.Cloner ? maxCloned : maxDestroyed;
         Collider2D[] inArea = new Collider2D[maxAffected];
@@ -94,7 +85,10 @@ public class Room : MonoBehaviour {
     public void SetState(State state) {
         ResetCooldown(true);
         this.state = state;
-        SetColor(GetStateColor(state));
+        SetColor(GetLitStateColor(state));
+
+        background.SetActive(state != State.Empty);
+        light.enabled = state != State.Empty;
     }
 
     private void UpdateColor() {
@@ -103,7 +97,7 @@ public class Room : MonoBehaviour {
         color = Color.Lerp(currentColor, color, Time.deltaTime * flashSpeed);
         SetColor(color);
 
-        light.intensity = Mathf.Lerp(light.intensity, lightIntensivity, Time.deltaTime * flashSpeed);
+        //light.intensity = Mathf.Lerp(light.intensity, lightIntensivity, Time.deltaTime * flashSpeed);
     }
 
     private void SetColor(Color color) {
@@ -115,9 +109,6 @@ public class Room : MonoBehaviour {
     private Color GetStateColor(State state) {
         Color color = Color.clear;
         switch(state) {
-            case State.Empty:
-                color = emptyColor;
-                break;
             case State.Cloner:
                 color = clonerColor;
                 break;
@@ -130,16 +121,15 @@ public class Room : MonoBehaviour {
 
     private Color GetLitStateColor(State state) {
         Color color = Color.clear;
-        if(state == State.Cloner) {
-            color = clonerLitColor;
-        } else if(state == State.Killer) {
-            color = destroyerLitColor;
+        switch(state) {
+            case State.Cloner:
+                color = clonerLitColor;
+                break;
+            case State.Killer:
+                color = killerLitColor;
+                break;
         }
         return color;
-    }
-
-    private void Glow() {
-        light.intensity = glowLightIntensivity;
     }
 
     private void ResetCooldown(bool lastChance = false) {

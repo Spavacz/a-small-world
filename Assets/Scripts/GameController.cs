@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
     public GameObject characterPrefab;
 
     public CameraController cameraController;
+    public AudioSource musicAudioSource;
+    public AudioSource gameOverAudioSource;
 
     public float gravity = 9.81f;
     public float rotationSpeed = 2f;
@@ -80,9 +82,15 @@ public class GameController : MonoBehaviour {
     public void OnKill() {
         alive--;
         if(alive <= 0) {
-            CameraFade.StartAlphaFade(Color.black, false, 1f, 1f, () => {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            });
+            GameOver();
         }
+    }
+
+    private void GameOver() {
+        musicAudioSource.Stop();
+        gameOverAudioSource.Play();
+        CameraFade.StartAlphaFade(Color.black, false, 1f, 1f, () => {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
     }
 }
