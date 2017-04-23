@@ -18,12 +18,7 @@ public class CameraController : MonoBehaviour {
     }
 
     void Start() {
-        processor.onBeat.AddListener(OnBeatDetected);
         processor.onSpectrum.AddListener(OnSpectrum);
-    }
-
-    private void OnBeatDetected() {
-        //Flash();
     }
 
     private void OnSpectrum(float[] spectrum) {

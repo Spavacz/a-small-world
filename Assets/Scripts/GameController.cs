@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public Camera cam;
 
-    public GameObject worldPrefab;
+    public GameObject world;
     public GameObject characterPrefab;
 
     public CameraController cameraController;
 
+    public float gravity = 9.81f;
     public float rotationSpeed = 2f;
     public float rotationStopTime = 0.5f;
     private float currentRotationSpeed = 0;
     private float rotationVelocity = 0;
-
-    private GameObject world;
+    private int alive;
 
     void Start() {
-        world = Instantiate(worldPrefab);
+        Physics2D.gravity = Vector2.down * gravity;
         SpawnCharacter();
     }
 
@@ -59,11 +60,29 @@ public class GameController : MonoBehaviour {
 
     private void ApplyRotationSpeed() {
         if(currentRotationSpeed != 0) {
-            world.transform.Rotate(0, 0, currentRotationSpeed);    
+            cameraController.transform.Rotate(0, 0, currentRotationSpeed);    
+            Quaternion cameraRotation = cameraController.transform.rotation;
+            Physics2D.gravity = Trigonometry.DegreeToVector2(cameraRotation.eulerAngles.z + 90f) * -gravity;
         }
     }
 
     private void SpawnCharacter() {
-        Instantiate(characterPrefab);
+        alive++;
+        GameObject go = Instantiate(characterPrefab);
+        go.GetComponent<Character>().gameController = this;
+    }
+
+    public void CloneCharacter(GameObject character) {
+        alive++;
+        Instantiate(character);
+    }
+
+    public void OnKill() {
+        alive--;
+        if(alive <= 0) {
+            CameraFade.StartAlphaFade(Color.black, false, 1f, 1f, () => {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
+        }
     }
 }
