@@ -14,11 +14,11 @@ public class CameraController : MonoBehaviour {
     public float camZoomSize;
 
     private Color color;
-    private Camera camera;
+    private Camera cam;
     public AudioProcessor processor;
 
     void Awake() {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         processor = GetComponent<AudioProcessor>();
     }
 
@@ -40,22 +40,22 @@ public class CameraController : MonoBehaviour {
 
     private void Flash() {
         if(flashEnabled) {
-            camera.backgroundColor = litColor;    
+            cam.backgroundColor = litColor;    
         }
     }
 
     private void UpdateFlash() {
-        camera.backgroundColor = Color32.Lerp(camera.backgroundColor, darkColor, Time.deltaTime * flashSpeed);
+        cam.backgroundColor = Color32.Lerp(cam.backgroundColor, darkColor, Time.deltaTime * flashSpeed);
     }
 
     private void Zoom() {
         if(zoomEnabled) {
-            camera.orthographicSize = camZoomSize;    
+            cam.orthographicSize = camZoomSize;    
         }
     }
 
     private void UpdateZoom() {
-        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, camSize, Time.deltaTime * flashSpeed);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize, Time.deltaTime * flashSpeed);
     }
 
     public void FlashScreen() {

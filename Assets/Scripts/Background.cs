@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Background : MonoBehaviour {
 
-    public MeshRenderer renderer;
+    public MeshRenderer meshRenderer;
     public float flashSpeed;
     public Color color;
     public Color litColor;
@@ -28,12 +28,12 @@ public class Background : MonoBehaviour {
     }
 
     void Update() {
-        renderer.material.color = Color32.Lerp(renderer.material.color, color, Time.deltaTime * flashSpeed);
+        meshRenderer.material.color = Color32.Lerp(meshRenderer.material.color, color, Time.deltaTime * flashSpeed);
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * flashSpeed);
     }
 
     public void Flash() {
-        renderer.material.color = litColor;
+        meshRenderer.material.color = litColor;
     }
 
     public void RandomSize() {

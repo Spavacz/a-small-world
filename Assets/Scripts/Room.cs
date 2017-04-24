@@ -23,7 +23,7 @@ public class Room : MonoBehaviour {
     public State state;
 
     public GameController gameController;
-    public Light light;
+    public Light halo;
     public GameObject background;
     public Color clonerColor;
     public Color clonerLitColor;
@@ -93,12 +93,12 @@ public class Room : MonoBehaviour {
         SetColor(GetLitStateColor(state));
 
         background.SetActive(state != State.Empty);
-        light.enabled = state != State.Empty;
+        halo.enabled = state != State.Empty;
     }
 
     private void UpdateColor() {
         Color color = GetStateColor(state);
-        Color currentColor = light.color;
+        Color currentColor = halo.color;
         color = Color.Lerp(currentColor, color, Time.deltaTime * flashSpeed);
         SetColor(color);
 
@@ -108,7 +108,7 @@ public class Room : MonoBehaviour {
     private void SetColor(Color color) {
 //        backgroundRenderer1.material.color = color;
 //        backgroundRenderer2.material.color = color;
-        light.color = color;
+        halo.color = color;
     }
 
     private Color GetStateColor(State state) {

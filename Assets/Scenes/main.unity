@@ -5095,7 +5095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da0e2bd72a1d4e8cb21223063249827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 145562675}
+  meshRenderer: {fileID: 145562675}
   flashSpeed: 4
   color: {r: 1, g: 1, b: 0, a: 1}
   litColor: {r: 1, g: 1, b: 1, a: 1}
@@ -7819,7 +7819,7 @@ MonoBehaviour:
   affectCooldown: 1.875
   state: 1
   gameController: {fileID: 1300436498}
-  light: {fileID: 703227907}
+  halo: {fileID: 703227907}
   background: {fileID: 208159809}
   clonerColor: {r: 0, g: 1, b: 0, a: 1}
   clonerLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -37208,7 +37208,7 @@ MonoBehaviour:
   affectCooldown: 1.875
   state: 1
   gameController: {fileID: 1300436498}
-  light: {fileID: 341546464}
+  halo: {fileID: 341546464}
   background: {fileID: 2083065329}
   clonerColor: {r: 0, g: 1, b: 0, a: 1}
   clonerLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -41943,7 +41943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da0e2bd72a1d4e8cb21223063249827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 1015703563}
+  meshRenderer: {fileID: 1015703563}
   flashSpeed: 4
   color: {r: 1, g: 1, b: 0, a: 1}
   litColor: {r: 1, g: 1, b: 1, a: 1}
@@ -69755,7 +69755,7 @@ MonoBehaviour:
   affectCooldown: 1.875
   state: 1
   gameController: {fileID: 1300436498}
-  light: {fileID: 479453261}
+  halo: {fileID: 479453261}
   background: {fileID: 1412326242}
   clonerColor: {r: 0, g: 1, b: 0, a: 1}
   clonerLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -79701,7 +79701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab9fba29defc4908ac8f02e2210330a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 1913551255}
+  meshRenderer: {fileID: 1913551255}
   flashSpeed: 4
   color: {r: 0, g: 0, b: 0, a: 1}
   litColor: {r: 1, g: 1, b: 0, a: 1}
@@ -84135,7 +84135,7 @@ MonoBehaviour:
   affectCooldown: 1.875
   state: 1
   gameController: {fileID: 1300436498}
-  light: {fileID: 354398390}
+  halo: {fileID: 354398390}
   background: {fileID: 1258321248}
   clonerColor: {r: 0, g: 1, b: 0, a: 1}
   clonerLitColor: {r: 1, g: 1, b: 1, a: 1}

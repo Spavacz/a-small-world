@@ -3,7 +3,7 @@
 [RequireComponent(typeof(MeshRenderer))]
 public class Floor : MonoBehaviour {
 
-    public MeshRenderer renderer;
+    public MeshRenderer meshRenderer;
     public float flashSpeed;
     public Color color;
     public Color litColor;
@@ -20,10 +20,10 @@ public class Floor : MonoBehaviour {
     }
 
     void Update() {
-        renderer.material.color = Color32.Lerp(renderer.material.color, color, Time.deltaTime * flashSpeed);
+        meshRenderer.material.color = Color32.Lerp(meshRenderer.material.color, color, Time.deltaTime * flashSpeed);
     }
 
     public void Flash() {
-        renderer.material.color = litColor;
+        meshRenderer.material.color = litColor;
     }
 }
