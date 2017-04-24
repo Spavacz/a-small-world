@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using EZObjectPools;
 
 public class GameController : MonoBehaviour {
     public Camera cam;
@@ -10,6 +11,8 @@ public class GameController : MonoBehaviour {
     public CameraController cameraController;
     public AudioSource musicAudioSource;
     public AudioSource gameOverAudioSource;
+    public EZObjectPool killEffectObjectPool;
+    public EZObjectPool characterObjectPool;
 
     public float gravityForce = 9.81f;
     public float rotationSpeed = 2f;
@@ -78,16 +81,25 @@ public class GameController : MonoBehaviour {
     }
 
     private void SpawnCharacter() {
-        alive++;
-        GameObject go = Instantiate(characterPrefab);
-        Character character = go.GetComponent<Character>();
-        character.gameController = this;
-        character.audioProcessor = cameraController.processor;
+        CreateCharacter(new Vector3(0, 0, -3f), Quaternion.identity);
     }
 
     public void CloneCharacter(GameObject character) {
+        CreateCharacter(character.transform.position, character.transform.rotation);
+    }
+
+    private void CreateCharacter(Vector3 position, Quaternion rotation) {
         alive++;
-        Instantiate(character);
+        GameObject created;
+        characterObjectPool.TryGetNextObject(position, rotation, out created);
+        SetupCharacter(created);
+    }
+
+    private void SetupCharacter(GameObject characterGameObject) {
+        Character character = characterGameObject.GetComponent<Character>();
+        character.killObjectPool = killEffectObjectPool;
+        character.gameController = this;
+        character.audioProcessor = cameraController.processor;
     }
 
     public void OnKill() {

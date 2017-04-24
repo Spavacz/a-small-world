@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using EZObjectPools;
 
 public class Character : MonoBehaviour {
 
     public Vector3 growScale;
     public float effectSpeed = 2f;
 
+    public EZObjectPool killObjectPool;
     public GameController gameController;
     public AudioProcessor audioProcessor;
 
@@ -19,8 +21,9 @@ public class Character : MonoBehaviour {
     }
 
     public void Kill() {
+        killObjectPool.TryGetNextObject(transform.position, transform.rotation);
         gameController.OnKill();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnSpectrum(float[] spectrum) {
