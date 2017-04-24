@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
     private int alive;
 
     void Start() {
+        musicAudioSource.time = Time.timeSinceLevelLoad;
         CameraFade.StartAlphaFade(Color.black, true, 7f, 2f, () => {
             gravity = gravityForce;
             UpdateGravity();
@@ -115,5 +116,16 @@ public class GameController : MonoBehaviour {
         CameraFade.StartAlphaFade(Color.black, false, 1f, 1f, () => {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });
+    }
+
+    public void FastForward(float amount) {
+        Time.timeScale = amount;
+        musicAudioSource.Stop();
+    }
+
+    public void NormalSpeed() {
+        Time.timeScale = 1f;
+        musicAudioSource.Play();
+        musicAudioSource.time = Time.timeSinceLevelLoad;
     }
 }
