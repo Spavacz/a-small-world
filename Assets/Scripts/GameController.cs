@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
     private int alive;
 
     void Start() {
-        CameraFade.StartAlphaFade(Color.black, true, 5f, 2f, () => {
+        CameraFade.StartAlphaFade(Color.black, true, 7f, 2f, () => {
             gravity = gravityForce;
             UpdateGravity();
         });
