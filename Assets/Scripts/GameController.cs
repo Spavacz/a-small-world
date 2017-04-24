@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     public EZObjectPool killEffectObjectPool;
     public EZObjectPool characterObjectPool;
 
+    public float mouseSensitivity = 10f;
     public float gravityForce = 9.81f;
     public float rotationSpeed = 2f;
     public float rotationStopTime = 0.5f;
@@ -45,14 +46,13 @@ public class GameController : MonoBehaviour {
     private void UpdateWorldRotationSpeed() {
         float rotation = 0;
         if(Input.GetButton("Rotate")) {
-            Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition); 
-            float h = rotationSpeed * Input.GetAxis("Mouse X");
-            float v = rotationSpeed * Input.GetAxis("Mouse Y");
-            float x = mouseWorldPos.x;
-            float y = mouseWorldPos.y;
+            float x = Input.mousePosition.x - Screen.width / 2;
+            float y = Input.mousePosition.y - Screen.height / 2;
+            float h = rotationSpeed * Input.GetAxis("Mouse X") * mouseSensitivity;
+            float v = rotationSpeed * Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-            rotation += x > 0 ? v : -v;
-            rotation += y > 0 ? -h : h;
+            rotation += x > 0 ? -v : v;
+            rotation += y > 0 ? h : -h;
             rotation = Mathf.Clamp(rotation, -rotationSpeed, rotationSpeed);
         } else if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
             float h = rotationSpeed * Input.GetAxis("Horizontal");
