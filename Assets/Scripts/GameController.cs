@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
 
     void Update() {
         if(Input.GetButtonUp("Quit")) {
-            Application.Quit();
+            GotoIntro();
         }
         UpdateWorldRotationSpeed();
     }
@@ -122,10 +122,14 @@ public class GameController : MonoBehaviour {
     public void OnSequenceEnd() {
         if(!isSequenceEnded) {
             isSequenceEnded = true;
-            CameraFade.StartAlphaFade(Color.black, false, 5f, 0f, () => {
-                SceneManager.LoadScene("intro");
-            });
+            GotoIntro();
         }
+    }
+
+    private void GotoIntro() {
+        CameraFade.StartAlphaFade(Color.black, false, 5f, 0f, () => {
+            SceneManager.LoadScene("intro");
+        });
     }
 
     public void FastForward(float amount) {
