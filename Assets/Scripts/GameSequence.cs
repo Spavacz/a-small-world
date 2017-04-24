@@ -23,6 +23,7 @@ public class GameSequence : MonoBehaviour {
 
     public SequenceEvent[] sequence;
 
+    public GameController gameController;
     public Room roomA;
     public Room roomB;
     public Room roomC;
@@ -62,9 +63,11 @@ public class GameSequence : MonoBehaviour {
     }
 
     private int GetNextIndex() {
-        int nextIndex = 0;
+        int nextIndex = currentIndex;
         if(currentIndex + 1 < sequence.Length) {
-            nextIndex = currentIndex + 1;
+            nextIndex++;
+        } else {
+            gameController.OnSequenceEnd();
         }
         return nextIndex;
     }

@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
     private float currentRotationSpeed = 0;
     private float rotationVelocity = 0;
     private int alive;
+    private bool isSequenceEnded = false;
 
     void Start() {
         musicAudioSource.time = Time.timeSinceLevelLoad;
@@ -116,6 +117,15 @@ public class GameController : MonoBehaviour {
         CameraFade.StartAlphaFade(Color.black, false, 1f, 1f, () => {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });
+    }
+
+    public void OnSequenceEnd() {
+        if(!isSequenceEnded) {
+            isSequenceEnded = true;
+            CameraFade.StartAlphaFade(Color.black, false, 5f, 0f, () => {
+                SceneManager.LoadScene("intro");
+            });
+        }
     }
 
     public void FastForward(float amount) {

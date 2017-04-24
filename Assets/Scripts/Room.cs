@@ -54,6 +54,11 @@ public class Room : MonoBehaviour {
     private void AffectArea() {
         SetColor(GetLitStateColor(state));
 
+        // dont kill us in ff mode u bstrd
+        if(Time.timeScale != 1f) {
+            return;
+        }
+
         int maxAffected = state == State.Cloner ? maxCloned : maxDestroyed;
         Collider2D[] inArea = new Collider2D[maxAffected];
         int affectedCount = collider2d.OverlapCollider(contactFilter, inArea);
