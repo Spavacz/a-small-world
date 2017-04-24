@@ -12,10 +12,14 @@ public class IntroController : MonoBehaviour {
     }
 
     void Update() {
-        if(isReady && Input.anyKeyDown) {
-            CameraFade.StartAlphaFade(Color.black, false, 2f, 0f, () => {
-                SceneManager.LoadScene("main");
-            });
+        if(isReady) {
+            if(Input.GetButtonDown("Quit")) {
+                Application.Quit();
+            } else if(Input.anyKeyDown) {
+                CameraFade.StartAlphaFade(Color.black, false, 2f, 0f, () => {
+                    SceneManager.LoadScene("main");
+                });
+            }
         }
     }
 }

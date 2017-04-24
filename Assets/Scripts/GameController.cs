@@ -29,8 +29,8 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetButtonDown("Fire2") || Input.GetButtonDown("Jump")) {
-            SpawnCharacter();
+        if(Input.GetButtonUp("Quit")) {
+            Application.Quit();
         }
         UpdateWorldRotationSpeed();
     }
@@ -40,9 +40,9 @@ public class GameController : MonoBehaviour {
     }
 
     private void UpdateWorldRotationSpeed() {
-        Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition); 
         float rotation = 0;
-        if(Input.GetButton("Fire1")) {
+        if(Input.GetButton("Rotate")) {
+            Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition); 
             float h = rotationSpeed * Input.GetAxis("Mouse X");
             float v = rotationSpeed * Input.GetAxis("Mouse Y");
             float x = mouseWorldPos.x;
