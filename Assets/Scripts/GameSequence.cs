@@ -21,7 +21,7 @@ public class GameSequence : MonoBehaviour {
         }
     }
 
-    public List<SequenceEvent> sequence = new List<SequenceEvent>();
+    public SequenceEvent[] sequence;
 
     public Room roomA;
     public Room roomB;
@@ -63,18 +63,18 @@ public class GameSequence : MonoBehaviour {
 
     private int GetNextIndex() {
         int nextIndex = 0;
-        if(currentIndex + 1 < sequence.Count) {
+        if(currentIndex + 1 < sequence.Length) {
             nextIndex = currentIndex + 1;
         }
         return nextIndex;
     }
 
     public void GenerateSequence() {
-        sequence.Clear();
+        sequence = new SequenceEvent[sequenceSize];
         Random.InitState(sequenceSeed);
         for(int i = 0; i < sequenceSize; i++) {
             SequenceEvent seqEvent = new SequenceEvent(GetRandomState(), GetRandomState(), GetRandomState(), GetRandomState(), defaultDuration);
-            sequence.Add(seqEvent);
+            sequence[i] = seqEvent;
         }
     }
 
