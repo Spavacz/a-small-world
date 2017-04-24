@@ -5,11 +5,11 @@ public class CameraController : MonoBehaviour {
 
     public float flashSpeed;
 
-    public bool flashEnabled = true;
+    public bool flashEnabled;
     public Color litColor;
     public Color darkColor;
 
-    public bool zoomEnabled = true;
+    public bool zoomEnabled;
     public float camSize;
     public float camZoomSize;
 
@@ -45,9 +45,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void UpdateFlash() {
-        if(flashEnabled) {
-            camera.backgroundColor = Color32.Lerp(camera.backgroundColor, darkColor, Time.deltaTime * flashSpeed);
-        }
+        camera.backgroundColor = Color32.Lerp(camera.backgroundColor, darkColor, Time.deltaTime * flashSpeed);
     }
 
     private void Zoom() {
@@ -57,9 +55,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void UpdateZoom() {
-        if(zoomEnabled) {
-            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, camSize, Time.deltaTime * flashSpeed);
-        }
+        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, camSize, Time.deltaTime * flashSpeed);
     }
 
     public void FlashScreen() {

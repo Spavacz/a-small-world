@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject world;
     public GameObject characterPrefab;
-
+    public Animator animator;
     public CameraController cameraController;
     public AudioSource musicAudioSource;
     public AudioSource gameOverAudioSource;
@@ -137,5 +137,9 @@ public class GameController : MonoBehaviour {
         Time.timeScale = 1f;
         musicAudioSource.Play();
         musicAudioSource.time = Time.timeSinceLevelLoad;
+    }
+
+    public void FlashScreen() {
+        cameraController.FlashScreen();
     }
 }

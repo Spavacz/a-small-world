@@ -3145,7 +3145,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 536773329}
-  m_Text: For the best experience use your headphones
+  m_Text: Best experienced with sound enabled. Headphones and keyboard are recomended.
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
@@ -3375,7 +3375,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1485612845}
-  m_Text: Music by Joshua Finnie
+  m_Text: Music by Joshua Finnie.
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1

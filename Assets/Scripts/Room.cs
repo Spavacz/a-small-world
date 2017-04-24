@@ -55,6 +55,7 @@ public class Room : MonoBehaviour {
         SetColor(GetLitStateColor(state));
 
         // dont kill us in ff mode u bstrd
+        return;
         if(Time.timeScale != 1f) {
             return;
         }

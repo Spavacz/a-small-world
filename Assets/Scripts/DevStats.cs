@@ -6,6 +6,7 @@ public class DevStats : MonoBehaviour {
 
     public Color color;
     public GameSequence sequence;
+    public Animator vixaAnimator;
 
     private GUIStyle style;
     private int w;
@@ -27,7 +28,15 @@ public class DevStats : MonoBehaviour {
         GUI.Label(rect, text, style);
 
         rect = new Rect(0, 2 * h, w, h);
-        text = string.Format("Time: {0:0.0}sec", sequence.currentTime);
+        text = string.Format("seq time: {0:0.0}sec", sequence.currentTime);
+        GUI.Label(rect, text, style);
+
+        AnimatorStateInfo state = vixaAnimator.GetCurrentAnimatorStateInfo(0);
+        AnimatorClipInfo[] clip = vixaAnimator.GetCurrentAnimatorClipInfo(0);
+        float animTime = clip[0].clip.length * state.normalizedTime;
+
+        rect = new Rect(0, 3 * h, w, h);
+        text = string.Format("anim time: {0:0.0}sec", animTime);
         GUI.Label(rect, text, style);
     }
 }

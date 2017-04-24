@@ -16,6 +16,7 @@ public class IntroController : MonoBehaviour {
             if(Input.GetButtonDown("Quit")) {
                 Application.Quit();
             } else if(Input.anyKeyDown) {
+                isReady = false;
                 CameraFade.StartAlphaFade(Color.black, false, 2f, 0f, () => {
                     SceneManager.LoadScene("main");
                 });
